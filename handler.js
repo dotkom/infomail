@@ -8,7 +8,6 @@ let transporter = nodemailer.createTransport({
     })
 });
 
-
 function sendMail(from_address, to_address, cc_addresses){
     console.log('TO: ' + to_address + ', FROM: ' + from_address);
     const data = {
@@ -25,9 +24,13 @@ function sendMail(from_address, to_address, cc_addresses){
     });
  }
 
+ function makeStringBoldHtml(text){
+     return "<b>" + text + "</b>";
+ }
+
 
 exports.myHandler = function(event, context, callback) {   
     
-    sendMail()
+    sendMail(event.from_address, event.to_address, event.cc_addresses)
     callback(null, "some success message");
 }
