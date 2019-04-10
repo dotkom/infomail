@@ -27,7 +27,12 @@ function sendMail(from_address, to_address, cc_addresses){
  }
 
  // https://online.ntnu.no/api/v1/events/?format=json&ordering=-is_today&event_start__gte=2019-04-10&event_end__lte=2019-04-24
-
+ Date.prototype.addDays = function(days) {
+     var date = new Date(this.valueOf());
+     date.setDate(date.getDate() + days);
+     return date;
+ }
+ 
  function formatDate(date) {
      var d = new Date(date),
          month = '' + (d.getMonth() + 1),
