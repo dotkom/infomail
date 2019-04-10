@@ -21,7 +21,7 @@ pipeline:
       event: push
       branch: drone-test
     bucket: infomail-prod
-    source: ./*
+    source: ./handler.zip
     target: /handler/
     region: eu-west-1
 
