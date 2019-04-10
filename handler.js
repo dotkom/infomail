@@ -10,14 +10,14 @@ let transporter = nodemailer.createTransport({
 });
 
 
-function sendMail(from_address, to_address, cc_addresses){
-    console.log('TO: ' + to_address + ', FROM: ' + from_address);
+function sendMail(from_address, to_address, text, html){
     const data = {
         from: from_address,
         to: to_address,
         cc: cc_addresses,
         subject: 'Infomail',
-        text: 'Infomail',
+        text: text,
+        html: html,
     }
 
     transporter.sendMail(data, (err, info) => {
@@ -115,6 +115,6 @@ exports.myHandler = async function(event, context, callback) {
     html+='</div>'
 
 
-    sendMail()
+    sendMail(process.env.from_address, process.env.to_address, text, html)
     callback(null, "some success message");
 }
