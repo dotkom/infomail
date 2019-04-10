@@ -1,4 +1,14 @@
 pipeline:
+  setup:
+    image: alpine:3.4
+    when:
+      event: push
+      branch: master
+    commands:
+    - apk update && apk add zip && apk add nodejs
+    - npm install nodemailer axios aws-sdk
+    - zip -r handler.zip handler.js node_modules package-lock.json
+
   deploy:
     image: plugins/s3
     secrets:
@@ -10,6 +20,8 @@ pipeline:
       event: push
       branch: master
     bucket: infomail-prod
-    source: ./*
-    target: /test
+    source: ./handler.zip
+    target: /handler/
     region: eu-west-1
+
+  
