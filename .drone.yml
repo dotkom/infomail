@@ -10,7 +10,7 @@ pipeline:
       event: push
       branch: drone-test
     bucket: infomail-prod
-    source: ./
+    source: .
     target: /test
     acl: public-read
     region: eu-west-1
