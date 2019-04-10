@@ -96,7 +96,7 @@ function dateToText(date){
 function formatHTML(object) {
   let ingress = object.ingress_short
   let title = object.title
-  let url = 'https://online.ntnu.no/'+object.absolute_url
+  let url = 'https://online.ntnu.no'+object.absolute_url
   let date = new Date(object.event_start)
 
   return '<ul><li>'+
@@ -111,7 +111,7 @@ function formatHTML(object) {
 function formatText(object) {
   let ingress = object.ingress_short
   let title = object.title
-  let url = 'https://online.ntnu.no/'+object.absolute_url
+  let url = 'https://online.ntnu.no'+object.absolute_url
   let date = new Date(object.event_start)
 
   return dateToText(date)+ ': '+title+'\n'+
