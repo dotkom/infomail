@@ -130,7 +130,7 @@ exports.myHandler = async function(event, context, callback) {
   htmlBody+='</div>'
 
 
-    sendMail(event.from_email, event.to_email, text, html)
+    sendMail(event.from_email, event.to_email, textBody, htmlBody)
     callback(null, "some success message");
 }
 
