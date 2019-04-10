@@ -33,7 +33,7 @@ pipeline:
         target: AWS_SECRET_ACCESS_KEY
     pull: true
     function_name: infomail
-    s3_bucker: infomail-prod
-    filename: handler/handler.zip
+    s3_bucket: infomail-prod
+    file_name: handler/handler.zip
 
   
