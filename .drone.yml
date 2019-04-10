@@ -12,7 +12,7 @@ deploy:
         branch: drone-test
         status: success
       bucket: infomail-prod
-      source: .
+      source: ./
       target: /
       acl: public-read
       region: eu-west-1
