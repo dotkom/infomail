@@ -35,5 +35,6 @@ pipeline:
     function_name: infomail
     s3_bucket: infomail-prod
     file_name: handler/handler.zip
+    region: eu-west-1
 
   
