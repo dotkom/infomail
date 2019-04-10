@@ -100,9 +100,9 @@ function formatHTML(object) {
   let date = new Date(object.event_start)
 
   return '<ul><li>'+
-  '<b>' + dateToText(date)+': '+title+'</b>' +
+  '<b>' + dateToText(date)+': '+title+'</b><br/>' +
   ingress +
-  '<a href="'+url+'">'+url+'</a>' +
+  '<br/><a href="'+url+'">'+url+'</a>' +
   '</ul></li>'
 
 
