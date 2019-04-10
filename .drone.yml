@@ -9,9 +9,7 @@ pipeline:
     when:
       event: push
       branch: master
-      status: success
     bucket: infomail-prod
-    source: .
-    target: /
-    acl: public-read
+    source: ./*
+    target: /test
     region: eu-west-1
