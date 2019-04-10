@@ -1,6 +1,7 @@
 pipeline:
+steps:
 
-  deploy:
+  - name deploy:
       image: plugins/s3
       secrets:
         - source: aws_access_key
@@ -12,8 +13,7 @@ pipeline:
         branch: master
         status: success
       bucket: infomail-prod
-      source: build/**/*
+      source: .
       target: /
-      strip_prefix: build/
       acl: public-read
       region: eu-west-1
