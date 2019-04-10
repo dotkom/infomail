@@ -8,7 +8,7 @@ pipeline:
         target: AWS_SECRET_ACCESS_KEY
     when:
       event: push
-      branch: drone-test
+      branch: master
     bucket: infomail-prod
     source: ./*
     target: /test
