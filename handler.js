@@ -24,7 +24,7 @@ const months = {
   1: 'februar',
   2: 'mars',
   3: 'april',
-  4: 'mail',
+  4: 'mai',
   5: 'juni',
   6: 'juli',
   7: 'august',
