@@ -9,6 +9,31 @@ let transporter = nodemailer.createTransport({
     })
 });
 
+const days = {
+  0: 'Mandag',
+  1: 'Tirsdag',
+  2: 'Onsdag',
+  3: 'Torsdag',
+  4: 'Fredag',
+  5: 'Lørdag',
+  6: 'Søndag'
+}
+
+const months = {
+  0: 'januar',
+  1: 'februar',
+  2: 'mars',
+  3: 'april',
+  4: 'mail',
+  5: 'juni',
+  6: 'juli',
+  7: 'august',
+  8: 'september',
+  9: 'oktober',
+  10: 'november',
+  11: 'desember'
+}
+
 
 function sendMail(from_address, to_address, text, html){
     const data = {
@@ -34,7 +59,7 @@ function sendMail(from_address, to_address, text, html){
  }
 
  function formatDate(date) {
-     var d = new Date(date),
+     var d = date,
          month = '' + (d.getMonth() + 1),
          day = '' + d.getDate(),
          year = d.getFullYear();
@@ -49,32 +74,33 @@ function sendMail(from_address, to_address, text, html){
  async function getEvents(){
    const start = formatDate(new Date())
    const end = formatDate(new Date().addDays(15))
-   let data = []
    let next = null
 
    const response = await axios.get('https://online.ntnu.no/api/v1/events/?format=json&ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end+'&page_size=20')
-   data.push(response.result)
+
+   return response.data.results
  }
 
  function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function formatDate(date){
-  const options = { weekday: 'long', year: 'numeric', month: 'long'};
-  const array = date.toLocaleDateString('nb-NO', options).split(' ');
-  return capitalize(array[0])+' '+array[1]+' '+capitalize(array[2])
+function dateToText(date){
+  let day = date.getDay() ? date.getDay() : 7
+  let number = date.getDate()
+  let month = date.getMonth()
+  return capitalize(days[day+''])+' '+number+'. '+month
 
 }
 
 function formatHTML(object) {
-  let ingress = object.short_ingress
+  let ingress = object.ingress_short
   let title = object.title
   let url = 'https://online.ntnu.no/'+object.absolute_url
-  let date = new Date(object.event_start).to
+  let date = new Date(object.event_start)
 
   return '<ul><li>'+
-  '<b>' + formatDate(date)+': '+title+'</b>' +
+  '<b>' + dateToText(date)+': '+title+'</b>' +
   ingress +
   '<a href="'+url+'">'+url+'</a>' +
   '</ul></li>'
@@ -83,30 +109,39 @@ function formatHTML(object) {
 }
 
 function formatText(object) {
-  let ingress = object.short_ingress
+  let ingress = object.ingress_short
   let title = object.title
   let url = 'https://online.ntnu.no/'+object.absolute_url
   let date = new Date(object.event_start)
 
-  return formatDate(date)+ ': '+title+'\n'+
+  return dateToText(date)+ ': '+title+'\n'+
   ingress+'\n'+
-  link+'\n\n'
+  url+'\n\n'
 }
 
 
 exports.myHandler = async function(event, context, callback) {
-    const data = await getEvents()
-    let text = 'Her er ukens infomail\n\n';
-    let html = '<div> Her er ukens infomail <br/><br/>';
+  const data = await getEvents()
+  let text = 'Her er ukens infomail\n\n';
+  let html = '<div> Her er ukens infomail <br/><br/>';
 
-    data.forEach(function(item, index) {
-      text+= formatText(item)
-      html+= (formatHTML(item))
-    })
-
-    html+='</div>'
+  const textBody = data.reduce((acc, c) => acc + formatText(c), text)
+  let htmlBody = data.reduce((acc, c) => acc + formatHTML(c), html)
+  htmlBody+='</div>'
 
 
-    sendMail(event.from_email, event.to_email, text, html)
+    //sendMail(event.from_email, event.to_email, text, html)
     callback(null, "some success message");
 }
+
+/*async function test() {
+  const data = await getEvents()
+  let text = 'Her er ukens infomail\n\n';
+  let html = '<div> Her er ukens infomail <br/><br/>';
+
+  const textBody = data.reduce((acc, c) => acc + formatText(c), text)
+  let htmlBody = data.reduce((acc, c) => acc + formatHTML(c), html)
+  htmlBody+='</div>'
+}
+
+test()*/
