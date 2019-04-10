@@ -1,7 +1,6 @@
 pipeline:
-steps:
 
-  - name deploy:
+deploy:
       image: plugins/s3
       secrets:
         - source: aws_access_key
