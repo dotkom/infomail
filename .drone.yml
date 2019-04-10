@@ -24,4 +24,16 @@ pipeline:
     target: /handler/
     region: eu-west-1
 
+  deploy-lambda:
+    image: omerxx/drone-lambda-plugin
+    secrets:
+      - source: aws_access_key
+        target: AWS_ACCESS_KEY_ID
+      - source: aws_secret_key
+        target: AWS_SECRET_ACCESS_KEY
+    pull: true
+    function_name: infomail
+    s3_bucker: infomail-prod
+    filename: handler/handler.zip
+
   
