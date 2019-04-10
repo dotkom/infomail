@@ -47,21 +47,8 @@ function sendMail(from_address, to_address, cc_addresses){
    let data = []
    let next = null
 
-   axios.get('https://online.ntnu.no/api/v1/events/?ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end)
-    .then(response => {
-      data.push(response.results)
-      next = response.next
-    })
-    .catch()
-
-    while (next) {
-      let response = await axios.get(next)
-      data.push(response.results)
-      next = response.next
-    }
-
-    return data
-
+   const response = await axios.get('https://online.ntnu.no/api/v1/events/?ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end+'&page_size=20')
+   data.push(response.result)
  }
 
  function capitalize(string) {
