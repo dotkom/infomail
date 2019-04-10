@@ -87,7 +87,7 @@ function dateToText(date){
   let day = date.getDay() ? date.getDay() : 7
   let number = date.getDate()
   let month = date.getMonth()
-  return capitalize(days[day+''])+' '+number+'. '+month
+  return capitalize(days[day+''])+' '+number+'. '+months[month+'']
 
 }
 
