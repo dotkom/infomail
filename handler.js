@@ -72,8 +72,7 @@ function sendMail(from_address, to_address, text, html){
 
  async function getEvents(){
    const start = formatDate(new Date())
-   const end = formatDate(new Date().addDays(15))
-   let next = null
+   const end = formatDate(new Date().addDays(30))
 
    const response = await axios.get('https://online.ntnu.no/api/v1/events/?format=json&ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end+'&page_size=20')
 
