@@ -34,7 +34,7 @@ function sendMail(from_address, to_address, text, html){
  }
 
  function formatDate(date) {
-     var d = new Date(date),
+     var d = date,
          month = '' + (d.getMonth() + 1),
          day = '' + d.getDate(),
          year = d.getFullYear();
