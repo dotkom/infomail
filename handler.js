@@ -39,7 +39,6 @@ function sendMail(from_address, to_address, text, html){
     const data = {
         from: from_address,
         to: to_address,
-        cc: cc_addresses,
         subject: 'Infomail',
         text: text,
         html: html,

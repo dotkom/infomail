@@ -31,9 +31,12 @@ pipeline:
         target: AWS_ACCESS_KEY_ID
       - source: aws_secret_key
         target: AWS_SECRET_ACCESS_KEY
+      - source: aws_default_region
+        target: AWS_DEFAULT_REGION
     pull: true
     function_name: infomail
-    s3_bucker: infomail-prod
-    filename: handler/handler.zip
+    s3_bucket: infomail-prod
+    file_name: handler/handler.zip
+    
 
   
