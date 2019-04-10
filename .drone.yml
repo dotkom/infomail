@@ -6,7 +6,7 @@ pipeline:
       event: push
       branch: drone-test
     commands:
-    - apk update && apk add zip && apk add node
+    - apk update && apk add zip && apk add nodejs
     - npm install nodemailer axios aws-sdk
     - zip -r handler.zip handler.js node_modules package-lock.json
 
@@ -19,7 +19,7 @@ pipeline:
         target: AWS_SECRET_ACCESS_KEY
     when:
       event: push
-      branch: master
+      branch: drone-test
     bucket: infomail-prod
     source: ./*
     target: /handler/
