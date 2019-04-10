@@ -107,6 +107,6 @@ exports.myHandler = async function(event, context, callback) {
     html+='</div>'
 
 
-    sendMail(process.env.from_address, process.env.to_address, text, html)
+    sendMail(event.from_email, event.to_email, text, html)
     callback(null, "some success message");
 }
