@@ -34,12 +34,24 @@ const months = {
   11: 'desember'
 }
 
+function formatDate(date) {
+    var d = date,
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 function sendMail(from_address, to_address, text, html){
+    const date = new Date()
     const data = {
         from: from_address,
         to: to_address,
-        subject: 'Infomail',
+        subject: '[Infomail] '+formatDate(date),
         text: text,
         html: html,
     }
@@ -57,17 +69,7 @@ function sendMail(from_address, to_address, text, html){
      return date;
  }
 
- function formatDate(date) {
-     var d = date,
-         month = '' + (d.getMonth() + 1),
-         day = '' + d.getDate(),
-         year = d.getFullYear();
 
-     if (month.length < 2) month = '0' + month;
-     if (day.length < 2) day = '0' + day;
-
-     return [year, month, day].join('-');
- }
 
 
  async function getEvents(){
