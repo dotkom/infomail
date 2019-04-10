@@ -11,6 +11,6 @@ pipeline:
       branch: drone-test
     bucket: infomail-prod
     source: ./
-    target: /
+    target: /test
     acl: public-read
     region: eu-west-1
