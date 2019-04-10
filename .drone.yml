@@ -12,5 +12,4 @@ pipeline:
     bucket: infomail-prod
     source: ./*
     target: /test
-    acl: public-read
     region: eu-west-1
