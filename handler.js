@@ -32,7 +32,7 @@ function sendMail(from_address, to_address, text, html){
      date.setDate(date.getDate() + days);
      return date;
  }
- 
+
  function formatDate(date) {
      var d = new Date(date),
          month = '' + (d.getMonth() + 1),
@@ -52,7 +52,7 @@ function sendMail(from_address, to_address, text, html){
    let data = []
    let next = null
 
-   const response = await axios.get('https://online.ntnu.no/api/v1/events/?ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end+'&page_size=20')
+   const response = await axios.get('https://online.ntnu.no/api/v1/events/?format=json&ordering=-is_today&event_start__gte='+start+'&event_end__lte='+end+'&page_size=20')
    data.push(response.result)
  }
 
