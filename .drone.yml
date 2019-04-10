@@ -1,13 +1,13 @@
 pipeline:
 
   setup:
-    image: node:11
+    image: alpine:3.4
     when:
       event: push
       branch: drone-test
     commands:
+    - apk update && apk add zip && apk add node
     - npm install nodemailer axios aws-sdk
-    - apk update && apk add zip
     - zip -r handler.zip handler.js node_modules package-lock.json
 
   deploy:
