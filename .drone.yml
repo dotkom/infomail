@@ -1,10 +1,9 @@
 pipeline:
-
   setup:
     image: alpine:3.4
     when:
       event: push
-      branch: drone-test
+      branch: master
     commands:
     - apk update && apk add zip && apk add nodejs
     - npm install nodemailer axios aws-sdk
@@ -19,7 +18,7 @@ pipeline:
         target: AWS_SECRET_ACCESS_KEY
     when:
       event: push
-      branch: drone-test
+      branch: master
     bucket: infomail-prod
     source: ./handler.zip
     target: /handler/
