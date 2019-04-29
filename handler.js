@@ -16,7 +16,7 @@ const days = {
   3: 'Onsdag',
   4: 'Torsdag',
   5: 'Fredag',
-  6: 'Lørdag',
+  6: 'Lørdag'
 }
 
 const months = {
@@ -57,8 +57,6 @@ function sendMail(from_address, to_address, text, html){
     }
 
     transporter.sendMail(data, (err, info) => {
-        console.log(info.envelope);
-        console.log(info.messageId);
     });
  }
 
