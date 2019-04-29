@@ -10,13 +10,13 @@ let transporter = nodemailer.createTransport({
 });
 
 const days = {
-  0: 'Mandag',
-  1: 'Tirsdag',
-  2: 'Onsdag',
-  3: 'Torsdag',
-  4: 'Fredag',
-  5: 'Lørdag',
-  6: 'Søndag'
+  0: 'Søndag',
+  1: 'Mandag',
+  2: 'Tirsdag',
+  3: 'Onsdag',
+  4: 'Torsdag',
+  5: 'Fredag',
+  6: 'Lørdag',
 }
 
 const months = {
@@ -86,7 +86,7 @@ function sendMail(from_address, to_address, text, html){
 }
 
 function dateToText(date){
-  let day = date.getDay() ? date.getDay() : 7
+  let day = date.getDay()
   let number = date.getDate()
   let month = date.getMonth()
   return capitalize(days[day+''])+' '+number+'. '+months[month+'']
